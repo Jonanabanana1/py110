@@ -1,0 +1,137 @@
+
+**String Methods**
+1. Explain the difference between the `index` and `find` methods in strings. Why would you use one over the other?
+   - `index` raises a `ValueError` if the substring is not found, whereas `find` returns `-1`. Use `index` when you expect the substring to exist and want an exception for debugging. Use `find` when you want to handle the absence of the substring gracefully.
+
+2. How does the `split` method work? Why is it useful when processing text data?
+   - The `split` method divides a string into a list of substrings based on a specified delimiter (default is whitespace). It's useful for parsing structured data like CSVs or processing sentences into words.
+
+3. What is the purpose of the `strip` method? How does it behave with different characters?
+   - `strip` removes leading and trailing whitespace or specified characters. It's commonly used to clean user input or text data.
+
+4. Explain how the `join` method works. Why is it considered the opposite of `split`?
+   - The `join` method concatenates elements of an iterable into a single string with a specified separator. It's the opposite of `split` because it combines strings instead of dividing them.
+
+5. How does the `replace` method handle multiple occurrences of a substring?
+   - The `replace` method replaces all occurrences of the specified substring unless a maximum count is provided.
+
+6. What is the difference between `upper`, `lower`, and `capitalize` in terms of string formatting?
+   - `upper` converts all characters to uppercase, `lower` converts them to lowercase, and `capitalize` converts the first character to uppercase while making the rest lowercase.
+
+**List Methods**
+7. What is the difference between `append` and `extend` when adding elements to a list?
+   - `append` adds a single element to the end of a list, while `extend` iterates over an iterable and adds each element to the list.
+
+8. How does the `insert` method work, and why might it be more useful than `append` in some cases?
+   - `insert` places an element at a specified index, making it useful for adding items at specific positions.
+
+9. Explain the difference between `remove` and `pop`. When would you use each?
+   - `remove` deletes the first occurrence of a value, while `pop` removes and returns the element at a specified index. Use `remove` for values and `pop` when you need the element.
+
+10. How does the `count` method work, and why is it useful when analyzing lists?
+    - `count` returns the number of occurrences of a specified value. It's useful for frequency analysis.
+
+11. Explain the behavior of the `sort` method compared to the `sorted` function.
+    - `sort` modifies the list in place, while `sorted` returns a new sorted list, leaving the original unaltered.
+
+12. Why would you use the `reverse` method on a list, and how does it differ from `reversed`?
+    - `reverse` modifies the list in place, whereas `reversed` returns an iterator for reverse traversal.
+
+13. What is the purpose of the `copy` method in lists? How does it relate to shallow and deep copies?
+    - `copy` creates a shallow copy of a list. Changes to nested objects affect both copies.
+
+**Dictionary Methods**
+14. Explain the difference between `keys`, `values`, and `items` when working with dictionaries.
+    - `keys` returns dictionary keys, `values` returns values, and `items` returns key-value pairs as tuples.
+
+15. What is the purpose of the `get` method, and how does it provide safety in accessing dictionary elements?
+    - `get` retrieves the value for a key or a default value if the key is not present, preventing errors.
+
+16. How does `setdefault` differ from the standard assignment of a value to a dictionary key?
+    - `setdefault` inserts a key with a default value only if the key doesn’t exist, preserving existing data.
+
+17. Explain how `update` modifies a dictionary. How does it handle conflicts with existing keys?
+    - `update` adds or replaces key-value pairs. Existing keys are overwritten.
+
+18. Describe the difference between `pop` and `popitem`. When would you use each?
+    - `pop` removes a specified key-value pair, while `popitem` removes an arbitrary pair (last in Python 3.7+).
+
+**Set Methods**
+19. How do `add` and `update` differ when adding elements to a set?
+    - `add` inserts a single element, while `update` adds multiple elements from an iterable.
+
+20. Explain the behavior of `union`, `intersection`, and `difference`. How do these methods demonstrate the mathematical nature of sets?
+    - `union` combines elements from sets, `intersection` finds common elements, and `difference` finds unique elements in the first set.
+
+21. What is the significance of `issubset` and `issuperset` when comparing sets?
+    - `issubset` checks if a set is fully contained in another. `issuperset` checks the opposite.
+
+22. Why would you use the `isdisjoint` method?
+    - `isdisjoint` checks if sets share no elements, useful for detecting independence.
+
+**Frozenset Methods**
+23. How does a `frozenset` differ from a regular set, and why would you use it?
+    - `frozenset` is immutable, making it hashable and usable as dictionary keys or set elements.
+
+24. Explain how the `union` and `intersection` methods work for `frozenset`.
+    - They behave like set methods but return new `frozenset` objects.
+
+**Tuple Methods**
+25. What is the purpose of the `index` and `count` methods in tuples, and why are they limited to read-only operations?
+    - They provide information without modifying tuples, as tuples are immutable.
+
+26. Explain the concept of unpacking tuples and provide an example where it might be used.
+    - Unpacking assigns tuple elements to variables, useful in functions returning multiple values.
+
+**Range and Enumerate**
+27. How does a `range` object differ from a standard list in Python?
+    - `range` is an immutable sequence, saving memory compared to lists.
+
+28. What is the role of `enumerate` during iteration? Why is it considered more Pythonic than using a traditional counter variable?
+    - `enumerate` provides an index-value pair, making code cleaner and less error-prone.
+
+**Built-in Functions**
+29. How does the `sum` function work, and what types of data does it support?
+    - `sum` calculates the total of numeric elements in an iterable.
+
+30. What is the purpose of the `all` function, and how does it behave with an empty iterable?
+    - `all` checks if all elements are truthy. It returns `True` for empty iterables.
+
+**Conditional Statements**
+31. Why is the `elif` clause useful when writing conditional statements?
+    - `elif` provides multiple branches, simplifying nested `if-else` logic.
+
+32. Explain the importance of the `else` clause in providing fallback logic in conditional statements.
+    - `else` handles cases not covered by preceding conditions.
+
+**Iteration and Control Flow**
+33. Why would you use `break` and `continue` inside a loop? How do they affect the control flow?
+    - `break` exits a loop, while `continue` skips the current iteration.
+
+34. How does Python handle iteration differently in `for` loops compared to other languages?
+    - Python iterates over items in sequences, not indices, improving readability.
+
+**Sorting**
+35. What is the difference between the `sorted` function and the `list.sort` method?
+    - `sorted` creates a new list, while `list.sort` modifies the original.
+
+36. How does the `key` parameter in sorting provide flexibility? Provide an example.
+    - `key` specifies a function to determine sort order, like sorting by length.
+
+37. Explain how the `reverse` parameter modifies sorting behavior.
+    - `reverse=True` sorts in descending order.
+
+**Comprehensions**
+38. What are list comprehensions, and how do they improve readability compared to standard loops?
+    - They condense loops and conditional logic into single expressions.
+
+39. How can comprehensions be used for filtering and transforming data simultaneously?
+    - By combining conditions and expressions in one syntax.
+
+**Nested Data Structures and Iteration**
+40. Explain the challenges of working with nested data structures and how nested iteration resolves them.
+    - Accessing elements requires multiple loops, resolved by nested iterations.
+
+**Shallow and Deep Copy**
+41. What is the difference between a shallow copy and a deep copy? How does this impact mutable objects?
+    - Shallow copies share nested objects, while deep copies duplicate all objects.
