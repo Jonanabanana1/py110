@@ -31,7 +31,7 @@ class Square:
 
 class Board:
     def __init__(self):
-        self.squares = {key: Square() for key in range(1, 10)}
+        self.initialize_empty_board()
 
     def display(self):
         print()
@@ -80,6 +80,9 @@ class Board:
         print("\n")
         self.display()
 
+    def initialize_empty_board(self):
+        self.squares = {key: Square() for key in range(1, 10)}
+
 
 class Player:
     def __init__(self, marker):
@@ -113,10 +116,36 @@ class TTTGame:
         self.human = Human()
         self.computer = Computer()
 
+    @staticmethod
+    def _join_or(lst: list, delimiter=", ", conjunction="or") -> str:
+        lst_len = len(lst)
+        if lst_len == 0:
+            raise ValueError("List can not be empty")
+        if lst_len == 1:
+            return str(lst[0])
+        if lst_len == 2:
+            return f"{lst[0]} {conjunction} {lst[1]}"
+
+        last_idx = lst_len - 1
+        main_str = delimiter.join([str(elem) for elem in lst[:last_idx]])
+        return main_str + f"{delimiter}{conjunction} {lst[-1]}"
+
     def play(self):
         self.display_welcome_message()
-        self.board.display()
 
+        while True:
+            self.board.initialize_empty_board()
+            self.board.display()
+            self._play_round()
+            self.board.display_with_clear()
+            self.display_results()
+            if not self.play_again():
+                break
+            clear_screen()
+
+        self.display_goodbye_message()
+
+    def _play_round(self):
         while True:
             self.human_moves()
             if self.is_game_over():
@@ -128,9 +157,13 @@ class TTTGame:
 
             self.board.display_with_clear()
 
-        self.board.display_with_clear()
-        self.display_results()
-        self.display_goodbye_message()
+    def play_again(self):
+        while True:
+            prompt = "Would you like to play again? (y/n): "
+            answer = input(prompt).strip().lower()
+            if answer == "y" or answer == "n":
+                return answer == "y"
+            print("Please enter a valid response.")
 
     def display_welcome_message(self):
         clear_screen()
@@ -153,7 +186,7 @@ class TTTGame:
         valid_choices = self.board.unused_squares()
         while True:
             choices_list = [str(choice) for choice in valid_choices]
-            choices_str = ", ".join(choices_list)
+            choices_str = self._join_or(choices_list)
             prompt = f"Choose a square ({choices_str}): "
             choice = input(prompt)
 
@@ -170,9 +203,27 @@ class TTTGame:
         self.board.mark_square_at(choice, self.human.marker)
 
     def computer_moves(self):
-        valid_choices = self.board.unused_squares()
-        choice = random.choice(valid_choices)
+        choice = self.defensive_computer_move()
+        if not choice:
+            valid_choices = self.board.unused_squares()
+            choice = random.choice(valid_choices)
         self.board.mark_square_at(choice, self.computer.marker)
+
+    def defensive_computer_move(self):
+        for row in self.POSSIBLE_WINNING_ROWS:
+            key = self.at_risk_square(row)
+            if key:
+                return key
+
+        return None
+
+    def at_risk_square(self, row):
+        if self.board.count_markers_for(self.human, row) == 2:
+            for key in row:
+                if self.board.squares[key].is_unused():
+                    return key
+
+        return None
 
     def is_game_over(self):
         return self.board.is_full() or self.someone_won()
