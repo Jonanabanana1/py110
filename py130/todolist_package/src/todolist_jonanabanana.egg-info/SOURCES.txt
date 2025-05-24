@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+src/todolist_jonanabanana/__init__.py
+src/todolist_jonanabanana/todo.py
+src/todolist_jonanabanana/todolist.py
+src/todolist_jonanabanana.egg-info/PKG-INFO
+src/todolist_jonanabanana.egg-info/SOURCES.txt
+src/todolist_jonanabanana.egg-info/dependency_links.txt
+src/todolist_jonanabanana.egg-info/top_level.txt
+tests/test_todolist.py
